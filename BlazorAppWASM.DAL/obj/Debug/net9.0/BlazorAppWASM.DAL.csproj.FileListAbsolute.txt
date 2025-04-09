@@ -13,3 +13,18 @@ C:\Users\mberkani\Source\Repos\BookRazor\BlazorAppWASM.DAL\obj\Debug\net9.0\refi
 C:\Users\mberkani\Source\Repos\BookRazor\BlazorAppWASM.DAL\obj\Debug\net9.0\BlazorAppWASM.DAL.pdb
 C:\Users\mberkani\Source\Repos\BookRazor\BlazorAppWASM.DAL\obj\Debug\net9.0\BlazorAppWASM.DAL.genruntimeconfig.cache
 C:\Users\mberkani\Source\Repos\BookRazor\BlazorAppWASM.DAL\obj\Debug\net9.0\ref\BlazorAppWASM.DAL.dll
+C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.DAL\bin\Debug\net9.0\BlazorAppWASM.DAL.deps.json
+C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.DAL\bin\Debug\net9.0\BlazorAppWASM.DAL.runtimeconfig.json
+C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.DAL\bin\Debug\net9.0\BlazorAppWASM.DAL.dll
+C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.DAL\bin\Debug\net9.0\BlazorAppWASM.DAL.pdb
+C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.DAL\obj\Debug\net9.0\BlazorAppWASM.DAL.csproj.AssemblyReference.cache
+C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.DAL\obj\Debug\net9.0\BlazorAppWASM.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.DAL\obj\Debug\net9.0\BlazorAppWASM.DAL.AssemblyInfoInputs.cache
+C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.DAL\obj\Debug\net9.0\BlazorAppWASM.DAL.AssemblyInfo.cs
+C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.DAL\obj\Debug\net9.0\BlazorAppWASM.DAL.csproj.CoreCompileInputs.cache
+C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.DAL\obj\Debug\net9.0\BlazorAppWASM.DAL.sourcelink.json
+C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.DAL\obj\Debug\net9.0\BlazorAppWASM.DAL.dll
+C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.DAL\obj\Debug\net9.0\refint\BlazorAppWASM.DAL.dll
+C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.DAL\obj\Debug\net9.0\BlazorAppWASM.DAL.pdb
+C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.DAL\obj\Debug\net9.0\BlazorAppWASM.DAL.genruntimeconfig.cache
+C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.DAL\obj\Debug\net9.0\ref\BlazorAppWASM.DAL.dll

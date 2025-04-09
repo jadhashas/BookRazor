@@ -1,6 +1,6 @@
 @page "/auth/login"
 @using BlazorAppWASM.Services
-@using BlazorAppWASM.Models
+@using BlazorAppWASM.Models.Requests
 @using BlazorAppWASM.Services.Interfaces
 
 @inject IAuthService AuthService
@@ -21,20 +21,20 @@
             </div>
         }
 
-        <EditForm Model="@loginModel" OnValidSubmit="HandleLogin">
+        <EditForm Model="@loginRequest" OnValidSubmit="HandleLogin">
             <DataAnnotationsValidator />
             <ValidationSummary />
 
             <div class="form-group">
                 <label for="email">Email</label>
-                <InputText id="email" class="form-control" @bind-Value="loginModel.Email" />
-                <ValidationMessage For="@(() => loginModel.Email)" />
+                <InputText id="email" class="form-control" @bind-Value="loginRequest.Email" />
+                <ValidationMessage For="@(() => loginRequest.Email)" />
             </div>
 
             <div class="form-group">
                 <label for="password">Mot de passe</label>
-                <InputText id="password" type="password" class="form-control" @bind-Value="loginModel.MotDePasse" />
-                <ValidationMessage For="@(() => loginModel.MotDePasse)" />
+                <InputText id="password" type="password" class="form-control" @bind-Value="loginRequest.Password" />
+                <ValidationMessage For="@(() => loginRequest.Password)" />
             </div>
 
             <div class="form-group">
@@ -49,20 +49,27 @@
 </div>
 
 @code {
-    private LoginModel loginModel = new LoginModel();
+    private LoginRequest loginRequest = new LoginRequest();
     private string? errorMessage;
 
     private async Task HandleLogin()
     {
-        var result = await AuthService.Connexion(loginModel.Email, loginModel.MotDePasse);
-        if (result)
+        try
         {
-            StateService.SetUserConnected(true);
-            NavigationManager.NavigateTo("/");
+            var result = await AuthService.Connexion(loginRequest.Email, loginRequest.Password);
+            if (result)
+            {
+                StateService.SetUserConnected(true);
+                NavigationManager.NavigateTo("/");
+            }
+            else
+            {
+                errorMessage = "Email ou mot de passe incorrect.";
+            }
         }
-        else
+        catch (Exception ex)
         {
-            errorMessage = "Connexion échouée, veuillez vérifier vos informations.";
+            errorMessage = "Une erreur s'est produite lors de la connexion.";
         }
     }
 }

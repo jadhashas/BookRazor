@@ -1,93 +1,76 @@
+using BlazorAppWASM.Config;
 using BlazorAppWASM.Models;
+using BlazorAppWASM.Models.Requests;
+using BlazorAppWASM.Models.Responses;
 using BlazorAppWASM.Services.Interfaces;
+using System.Net.Http.Json;
 using System.Security.Claims;
+using System.Text.Json;
 
 namespace BlazorAppWASM.Services
 {
-
     public class AuthService : IAuthService
     {
+        private readonly HttpClient _httpClient;
         private readonly ILocalStorageService _localStorage;
         private const string StorageKey = "authToken";
         private Utilisateur? _utilisateurCourant;
-        private bool _isInitialized = false;
 
-        public AuthService(ILocalStorageService localStorage)
+        public AuthService(HttpClient httpClient, ILocalStorageService localStorage)
         {
+            _httpClient = httpClient;
             _localStorage = localStorage;
-        }
-
-        private async Task InitializeAsync()
-        {
-            if (!_isInitialized)
-            {
-                await GetUtilisateurCourant();
-                _isInitialized = true;
-            }
+            _httpClient.BaseAddress = new Uri(ApiConfig.BaseUrl);
         }
 
         public async Task<bool> Inscription(Utilisateur utilisateur)
         {
             try
             {
-                var utilisateurs = await _localStorage.GetItemAsync<List<Utilisateur>>("utilisateurs") ?? new List<Utilisateur>();
-
-                if (utilisateurs.Any(u => u.Email == utilisateur.Email))
+                var request = new RegisterRequest
                 {
-                    return false;
-                }
+                    Email = utilisateur.Email,
+                    Password = utilisateur.MotDePasse,
+                    FirstName = utilisateur.NomUtilisateur
+                };
 
-                utilisateurs.Add(utilisateur);
-                await _localStorage.SetItemAsync("utilisateurs", utilisateurs);
-
-                return true;
+                var response = await _httpClient.PostAsJsonAsync(ApiConfig.Auth.Register, request);
+                return response.IsSuccessStatusCode;
             }
             catch
             {
                 return false;
             }
         }
-
-
-
-
 
         public async Task<bool> Connexion(string email, string motDePasse)
         {
             try
             {
-                var utilisateurs = await _localStorage.GetItemAsync<List<Utilisateur>>("utilisateurs");
-
-                if (utilisateurs == null || !utilisateurs.Any(u => u.Email == email && u.MotDePasse == motDePasse))
+                var request = new LoginRequest
                 {
-                    return false;
+                    Email = email,
+                    Password = motDePasse
+                };
+
+                var response = await _httpClient.PostAsJsonAsync(ApiConfig.Auth.Login, request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadFromJsonAsync<LoginResponse>();
+                    if (result?.Token != null)
+                    {
+                        await _localStorage.SetItemAsync(StorageKey, result.Token);
+                        _httpClient.DefaultRequestHeaders.Authorization = 
+                            new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", result.Token);
+                        return true;
+                    }
                 }
-
-                _utilisateurCourant = utilisateurs.First(u => u.Email == email && u.MotDePasse == motDePasse);
-
-                var token = "fake-token-" + _utilisateurCourant.Id;
-
-                await _localStorage.SetItemAsync(StorageKey, token);
-
-                return true;
+                return false;
             }
             catch
             {
                 return false;
-            }
-        }
-
-        public async Task Deconnexion()
-        {
-            try
-            {
-                await _localStorage.RemoveItemAsync(StorageKey);
-                _utilisateurCourant = null;
-                _isInitialized = false;
-            }
-            catch
-            {
-                // erreurs
             }
         }
 
@@ -95,18 +78,20 @@ namespace BlazorAppWASM.Services
         {
             try
             {
-                if (_utilisateurCourant != null)
-                    return _utilisateurCourant;
-
                 var token = await _localStorage.GetItemAsync<string>(StorageKey);
                 if (string.IsNullOrEmpty(token))
                     return null;
 
-                // Récupérer tous les utilisateurs et trouver celui correspondant au token
-                var utilisateurs = await _localStorage.GetItemAsync<List<Utilisateur>>("utilisateurs");
-                _utilisateurCourant = utilisateurs?.FirstOrDefault(u => "fake-token-" + u.Id == token);
+                _httpClient.DefaultRequestHeaders.Authorization = 
+                    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-                return _utilisateurCourant;
+                var response = await _httpClient.GetAsync(ApiConfig.Auth.Me);
+                if (response.IsSuccessStatusCode)
+                {
+                    _utilisateurCourant = await response.Content.ReadFromJsonAsync<Utilisateur>();
+                    return _utilisateurCourant;
+                }
+                return null;
             }
             catch
             {
@@ -114,17 +99,23 @@ namespace BlazorAppWASM.Services
             }
         }
 
+        public async Task Deconnexion()
+        {
+            await _localStorage.RemoveItemAsync(StorageKey);
+            _httpClient.DefaultRequestHeaders.Authorization = null;
+            _utilisateurCourant = null;
+        }
 
         public async Task<bool> EstConnecte()
         {
-            await InitializeAsync();
-            return _utilisateurCourant != null;
+            var utilisateur = await GetUtilisateurCourant();
+            return utilisateur != null;
         }
 
         public async Task<bool> EstAdmin()
         {
-            await InitializeAsync();
-            return _utilisateurCourant?.Role == "Admin";
+            var utilisateur = await GetUtilisateurCourant();
+            return utilisateur?.Role == "Admin";
         }
     }
 } 

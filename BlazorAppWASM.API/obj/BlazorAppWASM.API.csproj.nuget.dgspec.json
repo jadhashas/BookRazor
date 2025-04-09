@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mberkani\\Source\\Repos\\BookRazor\\BlazorAppWASM.API\\BlazorAppWASM.API.csproj": {}
+    "C:\\Users\\jhashas\\OneDrive - SQLI\\Bureau\\BlazorAppWASM\\BlazorAppWASM.API\\BlazorAppWASM.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mberkani\\Source\\Repos\\BookRazor\\BlazorAppWASM.API\\BlazorAppWASM.API.csproj": {
+    "C:\\Users\\jhashas\\OneDrive - SQLI\\Bureau\\BlazorAppWASM\\BlazorAppWASM.API\\BlazorAppWASM.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mberkani\\Source\\Repos\\BookRazor\\BlazorAppWASM.API\\BlazorAppWASM.API.csproj",
+        "projectUniqueName": "C:\\Users\\jhashas\\OneDrive - SQLI\\Bureau\\BlazorAppWASM\\BlazorAppWASM.API\\BlazorAppWASM.API.csproj",
         "projectName": "BlazorAppWASM.API",
-        "projectPath": "C:\\Users\\mberkani\\Source\\Repos\\BookRazor\\BlazorAppWASM.API\\BlazorAppWASM.API.csproj",
-        "packagesPath": "C:\\Users\\mberkani\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mberkani\\Source\\Repos\\BookRazor\\BlazorAppWASM.API\\obj\\",
+        "projectPath": "C:\\Users\\jhashas\\OneDrive - SQLI\\Bureau\\BlazorAppWASM\\BlazorAppWASM.API\\BlazorAppWASM.API.csproj",
+        "packagesPath": "C:\\Users\\jhashas\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jhashas\\OneDrive - SQLI\\Bureau\\BlazorAppWASM\\BlazorAppWASM.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\mberkani\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jhashas\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,15 +26,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\mberkani\\Source\\Repos\\BookRazor\\BlazorAppWASM.Services\\BlazorAppWASM.Services.csproj": {
-                "projectPath": "C:\\Users\\mberkani\\Source\\Repos\\BookRazor\\BlazorAppWASM.Services\\BlazorAppWASM.Services.csproj"
+              "C:\\Users\\jhashas\\OneDrive - SQLI\\Bureau\\BlazorAppWASM\\BlazorAppWASM.Services\\BlazorAppWASM.Services.csproj": {
+                "projectPath": "C:\\Users\\jhashas\\OneDrive - SQLI\\Bureau\\BlazorAppWASM\\BlazorAppWASM.Services\\BlazorAppWASM.Services.csproj"
               }
             }
           }
@@ -55,6 +54,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.3, )"
@@ -97,20 +100,20 @@
         }
       }
     },
-    "C:\\Users\\mberkani\\Source\\Repos\\BookRazor\\BlazorAppWASM.DAL\\BlazorAppWASM.DAL.csproj": {
+    "C:\\Users\\jhashas\\OneDrive - SQLI\\Bureau\\BlazorAppWASM\\BlazorAppWASM.DAL\\BlazorAppWASM.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mberkani\\Source\\Repos\\BookRazor\\BlazorAppWASM.DAL\\BlazorAppWASM.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\jhashas\\OneDrive - SQLI\\Bureau\\BlazorAppWASM\\BlazorAppWASM.DAL\\BlazorAppWASM.DAL.csproj",
         "projectName": "BlazorAppWASM.DAL",
-        "projectPath": "C:\\Users\\mberkani\\Source\\Repos\\BookRazor\\BlazorAppWASM.DAL\\BlazorAppWASM.DAL.csproj",
-        "packagesPath": "C:\\Users\\mberkani\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mberkani\\Source\\Repos\\BookRazor\\BlazorAppWASM.DAL\\obj\\",
+        "projectPath": "C:\\Users\\jhashas\\OneDrive - SQLI\\Bureau\\BlazorAppWASM\\BlazorAppWASM.DAL\\BlazorAppWASM.DAL.csproj",
+        "packagesPath": "C:\\Users\\jhashas\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jhashas\\OneDrive - SQLI\\Bureau\\BlazorAppWASM\\BlazorAppWASM.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\mberkani\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jhashas\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -119,7 +122,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -187,20 +189,20 @@
         }
       }
     },
-    "C:\\Users\\mberkani\\Source\\Repos\\BookRazor\\BlazorAppWASM.Services\\BlazorAppWASM.Services.csproj": {
+    "C:\\Users\\jhashas\\OneDrive - SQLI\\Bureau\\BlazorAppWASM\\BlazorAppWASM.Services\\BlazorAppWASM.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mberkani\\Source\\Repos\\BookRazor\\BlazorAppWASM.Services\\BlazorAppWASM.Services.csproj",
+        "projectUniqueName": "C:\\Users\\jhashas\\OneDrive - SQLI\\Bureau\\BlazorAppWASM\\BlazorAppWASM.Services\\BlazorAppWASM.Services.csproj",
         "projectName": "BlazorAppWASM.Services",
-        "projectPath": "C:\\Users\\mberkani\\Source\\Repos\\BookRazor\\BlazorAppWASM.Services\\BlazorAppWASM.Services.csproj",
-        "packagesPath": "C:\\Users\\mberkani\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mberkani\\Source\\Repos\\BookRazor\\BlazorAppWASM.Services\\obj\\",
+        "projectPath": "C:\\Users\\jhashas\\OneDrive - SQLI\\Bureau\\BlazorAppWASM\\BlazorAppWASM.Services\\BlazorAppWASM.Services.csproj",
+        "packagesPath": "C:\\Users\\jhashas\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jhashas\\OneDrive - SQLI\\Bureau\\BlazorAppWASM\\BlazorAppWASM.Services\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\mberkani\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jhashas\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -209,15 +211,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\mberkani\\Source\\Repos\\BookRazor\\BlazorAppWASM.DAL\\BlazorAppWASM.DAL.csproj": {
-                "projectPath": "C:\\Users\\mberkani\\Source\\Repos\\BookRazor\\BlazorAppWASM.DAL\\BlazorAppWASM.DAL.csproj"
+              "C:\\Users\\jhashas\\OneDrive - SQLI\\Bureau\\BlazorAppWASM\\BlazorAppWASM.DAL\\BlazorAppWASM.DAL.csproj": {
+                "projectPath": "C:\\Users\\jhashas\\OneDrive - SQLI\\Bureau\\BlazorAppWASM\\BlazorAppWASM.DAL\\BlazorAppWASM.DAL.csproj"
               }
             }
           }

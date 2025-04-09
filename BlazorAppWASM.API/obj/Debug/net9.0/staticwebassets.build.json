@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "iLovliYNL/eWc/k93K9pCKP0kgsngdpSjyPfec+BoGs=",
+  "Source": "BlazorAppWASM.API",
+  "BasePath": "_content/BlazorAppWASM.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

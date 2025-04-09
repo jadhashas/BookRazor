@@ -1,0 +1,59 @@
+@page "/livres/add"
+@using Microsoft.AspNetCore.Components.Forms
+@using BlazorAppWASM.Components
+@using BlazorAppWASM.Models
+
+<div class="page-header">
+    <h1>Ajouter un livre</h1>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <LivreForm OnLivreSave="SaveLivreAsync" OnLivreCancel="CancelAdd" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Inject]
+    public NavigationManager Navigation { get; set; } = default!;
+
+    [Inject]
+    public BlazorAppWASM.Services.LivreService LivreManager { get; set; } = default!;
+
+    private async Task SaveLivreAsync(LivreForm.SaveLivreEventArgs args)
+    {
+        try
+        {
+            // Sauvegarder le livre
+            await LivreManager.AddLivreAsync(args.Livre);
+
+            // Si une image a été uploadée, la sauvegarder
+            if (args.Image != null)
+            {
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "books", $"{args.Livre.Id}.jpg");
+                Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+
+                await using var stream = args.Image.OpenReadStream();
+                await using var fileStream = File.Create(path);
+                await stream.CopyToAsync(fileStream);
+            }
+
+            Navigation.NavigateTo("/livres");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erreur lors de l'ajout du livre : {ex.Message}");
+        }
+    }
+
+    private void CancelAdd()
+    {
+        Navigation.NavigateTo("/livres");
+    }
+} 

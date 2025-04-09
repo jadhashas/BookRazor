@@ -1,0 +1,196 @@
+@using BlazorAppWASM.Models
+@using System.ComponentModel.DataAnnotations
+@inject IJSRuntime JSRuntime
+
+<div class="card">
+    <div class="card-body">
+        <EditForm Model="@currentLivre" OnValidSubmit="OnFormSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group mb-3">
+                <div class="image-upload-container">
+                    @if (!string.IsNullOrEmpty(imageUrl))
+                    {
+                        <img src="@imageUrl" alt="Couverture du livre" class="book-cover-preview" />
+                    }
+                    <InputFile OnChange="HandleImageUpload" class="form-control" accept=".jpg,.jpeg,.png" />
+                    @if (!string.IsNullOrEmpty(errorMessage))
+                    {
+                        <div class="alert alert-danger mt-2">
+                            @errorMessage
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="titre">Titre</label>
+                        <InputText id="titre" @bind-Value="currentLivre.Titre" class="form-control" />
+                        <ValidationMessage For="@(() => currentLivre.Titre)" />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="auteur">Auteur</label>
+                        <InputText id="auteur" @bind-Value="currentLivre.Auteur" class="form-control" />
+                        <ValidationMessage For="@(() => currentLivre.Auteur)" />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="isbn">ISBN</label>
+                        <InputText id="isbn" @bind-Value="currentLivre.ISBN" class="form-control" />
+                        <ValidationMessage For="@(() => currentLivre.ISBN)" />
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="type">Type</label>
+                        <InputSelect id="type" @bind-Value="currentLivre.Type" class="form-control">
+                            <option value="Roman">Roman</option>
+                            <option value="Essai">Essai</option>
+                            <option value="Biographie">Biographie</option>
+                            <option value="Science-Fiction">Science-Fiction</option>
+                            <option value="Policier">Policier</option>
+                            <option value="Autre">Autre</option>
+                        </InputSelect>
+                        <ValidationMessage For="@(() => currentLivre.Type)" />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="datePublication">Date de publication</label>
+                        <InputDate id="datePublication" @bind-Value="currentLivre.DatePublication" class="form-control" />
+                        <ValidationMessage For="@(() => currentLivre.DatePublication)" />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="prix">Prix</label>
+                        <InputNumber id="prix" @bind-Value="currentLivre.Prix" class="form-control" />
+                        <ValidationMessage For="@(() => currentLivre.Prix)" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="description">Description</label>
+                <InputTextArea id="description" @bind-Value="currentLivre.Description" class="form-control" rows="4" />
+                <ValidationMessage For="@(() => currentLivre.Description)" />
+            </div>
+
+            <div class="form-check mb-3">
+                <InputCheckbox id="disponible" @bind-Value="currentLivre.Disponible" class="form-check-input" />
+                <label class="form-check-label" for="disponible">Disponible</label>
+            </div>
+
+            <div class="form-group mt-4">
+                <button type="submit" class="btn btn-primary me-2">
+                    <i class="fas fa-save me-1"></i> Enregistrer
+                </button>
+                <button type="button" class="btn btn-secondary" @onclick="OnFormCancel">
+                    <i class="fas fa-times me-1"></i> Annuler
+                </button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private Livre currentLivre = new();
+    private string? imageUrl;
+    private IBrowserFile? uploadedImage;
+    private string? errorMessage;
+    private const int MaxFileSize = 5 * 1024 * 1024; // 5MB
+    private readonly string[] AllowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+
+    [Parameter]
+    public Livre? ExistingLivre { get; set; }
+
+    [Parameter]
+    public EventCallback<SaveLivreEventArgs> OnLivreSave { get; set; }
+
+    [Parameter]
+    public EventCallback OnLivreCancel { get; set; }
+
+    public class SaveLivreEventArgs
+    {
+        public Livre Livre { get; set; } = default!;
+        public IBrowserFile? Image { get; set; }
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (ExistingLivre != null)
+        {
+            currentLivre = new Livre
+            {
+                Id = ExistingLivre.Id,
+                Titre = ExistingLivre.Titre,
+                Auteur = ExistingLivre.Auteur,
+                ISBN = ExistingLivre.ISBN,
+                DatePublication = ExistingLivre.DatePublication,
+                Prix = ExistingLivre.Prix,
+                Description = ExistingLivre.Description,
+                Type = ExistingLivre.Type,
+                Disponible = ExistingLivre.Disponible
+            };
+            imageUrl = $"/images/books/{ExistingLivre.Id}.jpg";
+        }
+    }
+
+    private async Task HandleImageUpload(InputFileChangeEventArgs e)
+    {
+        try
+        {
+            errorMessage = null;
+            var file = e.File;
+
+            // Vérifier la taille du fichier
+            if (file.Size > MaxFileSize)
+            {
+                errorMessage = "La taille du fichier ne doit pas dépasser 5 MB";
+                return;
+            }
+
+            // Vérifier l'extension
+            var extension = Path.GetExtension(file.Name).ToLowerInvariant();
+            if (!AllowedExtensions.Contains(extension))
+            {
+                errorMessage = "Seuls les fichiers .jpg, .jpeg et .png sont acceptés";
+                return;
+            }
+
+            uploadedImage = file;
+            
+            // Créer une URL temporaire pour la prévisualisation
+            using var stream = file.OpenReadStream(MaxFileSize);
+            using var ms = new MemoryStream();
+            await stream.CopyToAsync(ms);
+            var imageBytes = ms.ToArray();
+            var base64 = Convert.ToBase64String(imageBytes);
+            imageUrl = $"data:{file.ContentType};base64,{base64}";
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Erreur lors du chargement de l'image : {ex.Message}";
+            uploadedImage = null;
+            imageUrl = null;
+        }
+    }
+
+    private async Task OnFormSubmit()
+    {
+        var args = new SaveLivreEventArgs
+        {
+            Livre = currentLivre,
+            Image = uploadedImage
+        };
+        await OnLivreSave.InvokeAsync(args);
+    }
+
+    private async Task OnFormCancel()
+    {
+        await OnLivreCancel.InvokeAsync();
+    }
+} 

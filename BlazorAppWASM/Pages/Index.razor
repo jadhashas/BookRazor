@@ -1,0 +1,126 @@
+@page "/"
+@using BlazorAppWASM.Services.Interfaces
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+@inject StateService StateService
+@inject IAuthService AuthService
+
+<div class="home-hero">
+    <div class="home-hero-content" data-aos="fade-up">
+        <h1>Gérez votre bibliothèque en toute simplicité</h1>
+        <p>Une solution moderne et intuitive pour organiser, suivre et gérer votre collection de livres</p>
+        <div>
+            <a href="/livres" class="btn-primary-gradient">
+                <i class="fas fa-book-open me-2"></i>Découvrir la bibliothèque
+            </a>
+            @if (StateService.GetIsConnected())
+            {
+                <a href="#" @onclick="Deconnexion" class="btn-secondary-outline">
+                    <i class="fas fa-sign-out-alt me-2"></i>Se déconnecter
+                </a>
+            }
+            else
+            {
+                <a href="/auth/login" class="btn-secondary-outline">
+                    <i class="fas fa-sign-in-alt me-2"></i>Se connecter
+                </a>
+                <a href="/auth/register" class="btn-secondary-outline">
+                    <i class="fas fa-user-plus me-2"></i>S'inscrire
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+<section class="home-features">
+    <div class="section-header" data-aos="fade-up">
+        <h2>Fonctionnalités principales</h2>
+        <p>Découvrez comment notre application peut vous aider à gérer votre bibliothèque</p>
+    </div>
+    <div class="home-features-grid">
+        <div class="feature-item" data-aos="fade-up" data-aos-delay="100">
+            <i class="fas fa-tasks"></i>
+            <h3>Gestion simple</h3>
+            <p>Ajoutez, modifiez et organisez vos livres en quelques clics</p>
+        </div>
+        <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
+            <i class="fas fa-search"></i>
+            <h3>Recherche avancée</h3>
+            <p>Retrouvez rapidement n'importe quel livre de votre collection</p>
+        </div>
+        <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
+            <i class="fas fa-mobile-alt"></i>
+            <h3>Accessible partout</h3>
+            <p>Accédez à votre bibliothèque depuis n'importe quel appareil</p>
+        </div>
+    </div>
+</section>
+
+<section class="how-it-works">
+    <div class="section-header" data-aos="fade-up">
+        <h2>Comment ça marche</h2>
+        <p>Commencez à utiliser notre application en trois étapes simples</p>
+    </div>
+    <div class="steps-container">
+        <div class="step-item" data-aos="fade-right">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h3>Créez votre compte</h3>
+                <p>Inscrivez-vous gratuitement en quelques secondes pour commencer</p>
+            </div>
+        </div>
+        <div class="step-item" data-aos="fade-right" data-aos-delay="100">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h3>Ajoutez vos livres</h3>
+                <p>Commencez à ajouter vos livres avec leurs informations détaillées</p>
+            </div>
+        </div>
+        <div class="step-item" data-aos="fade-right" data-aos-delay="200">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h3>Gérez votre collection</h3>
+                <p>Organisez, recherchez et suivez votre bibliothèque facilement</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="cta-content" data-aos="zoom-in">
+        <h2>Prêt à commencer ?</h2>
+        <p>Rejoignez notre communauté et commencez à gérer votre bibliothèque dès aujourd'hui</p>
+        <a href="/auth/register" class="btn-primary-gradient">
+            <i class="fas fa-user-plus me-2"></i>Créer un compte
+        </a>
+    </div>
+</section>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        // Souscrire aux changements de l'état de connexion
+        StateService.OnChange += StateHasChanged;
+
+        // Vérifier si l'utilisateur est déjà connecté
+        if (await AuthService.EstConnecte())
+        {
+            StateService.SetUserConnected(true);
+        }
+    }
+
+    private async Task Deconnexion()
+    {
+        await AuthService.Deconnexion();
+        StateService.SetUserConnected(false); // Mettre à jour l'état après déconnexion
+        NavigationManager.NavigateTo("/"); // Rediriger après la déconnexion
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("initAOS");
+        }
+    }
+}

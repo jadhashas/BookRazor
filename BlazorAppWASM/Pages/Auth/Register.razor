@@ -1,0 +1,96 @@
+@page "/auth/register"
+@using BlazorAppWASM.Services
+@using BlazorAppWASM.Models
+@using BlazorAppWASM.Services.Interfaces
+
+@inject IAuthService AuthService
+@inject NavigationManager NavigationManager
+
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h2>Inscription</h2>
+            <p>Créez votre compte pour accéder à votre bibliothèque</p>
+        </div>
+
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="alert alert-danger mt-3">
+                @errorMessage
+            </div>
+        }
+
+        <EditForm Model="@registerModel" OnValidSubmit="HandleRegister">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group">
+                <label for="username">Nom d'utilisateur</label>
+                <InputText id="username" class="form-control" @bind-Value="registerModel.NomUtilisateur" />
+                <ValidationMessage For="@(() => registerModel.NomUtilisateur)" />
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <InputText id="email" class="form-control" @bind-Value="registerModel.Email" />
+                <ValidationMessage For="@(() => registerModel.Email)" />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <InputText id="password" type="password" class="form-control" @bind-Value="registerModel.MotDePasse" />
+                <ValidationMessage For="@(() => registerModel.MotDePasse)" />
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirmer le mot de passe</label>
+                <InputText id="confirmPassword" type="password" class="form-control" @bind-Value="registerModel.ConfirmMotDePasse" />
+                <ValidationMessage For="@(() => registerModel.ConfirmMotDePasse)" />
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
+            </div>
+
+            <div class="auth-footer">
+                <p>Déjà un compte ? <a href="/auth/login">Se connecter</a></p>
+            </div>
+        </EditForm>
+
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="alert alert-danger mt-3">
+                @errorMessage
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private RegisterModel registerModel = new RegisterModel();
+    private string? errorMessage;
+
+    private async Task HandleRegister()
+    {
+        var utilisateur = new Utilisateur
+            {
+                NomUtilisateur = registerModel.NomUtilisateur,
+                Email = registerModel.Email,
+                MotDePasse = registerModel.MotDePasse,
+                Role = "Utilisateur" // Rôle par défaut
+            };
+
+        var result = await AuthService.Inscription(utilisateur);
+
+        if (result)
+        {
+            // Si l'inscription réussit, rediriger l'utilisateur vers la page de connexion
+            NavigationManager.NavigateTo("/auth/login");
+        }
+        else
+        {
+            // Si l'inscription échoue, afficher un message d'erreur
+            errorMessage = "L'email est déjà utilisé ou une erreur s'est produite. Veuillez vérifier vos informations.";
+        }
+    }
+}

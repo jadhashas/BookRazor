@@ -1,0 +1,88 @@
+@using BlazorAppWASM.Services.Interfaces
+
+@inject IAuthService AuthService
+@inject StateService StateService
+@inject NavigationManager NavigationManager
+
+<div class="sidebar @(isSidebarVisible ? "show" : "")">
+    <div class="sidebar-header">
+        <a href="/" class="sidebar-brand">
+            <i class="fas fa-book"></i>
+            <h1>Ma Bibliothèque</h1>
+        </a>
+    </div>
+
+    <div class="sidebar-section">
+        <div class="sidebar-section-title">Navigation</div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+                    <i class="fas fa-home"></i>
+                    <span>Accueil</span>
+                </NavLink>
+            </li>
+            <li class="nav-item">
+                <NavLink class="nav-link" href="/livres">
+                    <i class="fas fa-book-open"></i>
+                    <span>Livres</span>
+                </NavLink>
+            </li>
+        </ul>
+    </div>
+
+    <div class="auth-section">
+        <div class="auth-buttons">
+            @if (isConnected)
+            {
+                <a href="#" @onclick="Deconnexion" class="auth-link">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Se Déconnecter</span>
+                </a>
+            }
+            else
+            {
+                <a href="/auth/login" class="auth-link">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Se Connecter</span>
+                </a>
+                <a href="/auth/register" class="auth-link">
+                    <i class="fas fa-user-plus"></i>
+                    <span>S'inscrire</span>
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+@if (isSmallScreen)
+{
+    <button class="navbar-toggle" @onclick="ToggleSidebar">
+        <i class="fas fa-bars"></i>
+    </button>
+}
+
+@code {
+    private bool isSmallScreen = false;
+    private bool isSidebarVisible = false;
+    private bool isConnected = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Vérifier si l'utilisateur est connecté
+        isConnected = await AuthService.EstConnecte();
+        isSmallScreen = true;
+    }
+
+    private async Task Deconnexion()
+    {
+        await AuthService.Deconnexion();
+        StateService.SetUserConnected(false);
+        isConnected = false; // Mettre à jour l'état après la déconnexion
+        NavigationManager.NavigateTo("/"); // Rediriger l'utilisateur après la déconnexion
+    }
+
+    private void ToggleSidebar()
+    {
+        isSidebarVisible = !isSidebarVisible;
+    }
+}

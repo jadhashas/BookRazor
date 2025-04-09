@@ -1,0 +1,74 @@
+# Fichiers de build
+bin/
+obj/
+
+# Fichiers de configuration utilisateur
+.vscode/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Fichiers de logs
+*.log
+
+# Fichiers de débogage
+*.pdb
+*.mdb
+
+# Fichiers de publication
+publish/
+out/
+
+# Fichiers temporaires
+*.tmp
+*.temp
+*.cache
+*.csproj.user
+
+# Fichiers de dépendances
+packages/
+.nuget/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Fichiers spécifiques à Blazor WebAssembly
+wwwroot/css/app.css
+wwwroot/css/bootstrap/
+wwwroot/css/open-iconic/
+wwwroot/index.html
+wwwroot/favicon.ico
+wwwroot/icon-192.png
+wwwroot/icon-512.png
+wwwroot/manifest.json
+wwwroot/service-worker.js
+wwwroot/service-worker.published.js
+
+# Fichiers de configuration de l'IDE
+.idea/
+*.sln.iml
+
+# Fichiers de configuration de l'éditeur
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+
+# Fichiers de configuration de l'environnement
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Fichiers de configuration de Docker
+docker-compose.yml
+docker-compose.override.yml
+Dockerfile
+Dockerfile.*
+
+# Fichiers de configuration de Kubernetes
+*.k8s.yaml
+*.k8s.yml

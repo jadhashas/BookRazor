@@ -1,0 +1,8 @@
+# Visual Studio
+.vs/
+.vscode/
+.idea/
+
+# Folders for build results
+bin/
+obj/

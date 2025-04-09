@@ -1,10 +1,13 @@
+# Visual Studio
+.vs/
+.idea/
+
 # Fichiers de build
 bin/
 obj/
 
 # Fichiers de configuration utilisateur
 .vscode/
-.vs/
 *.user
 *.suo
 *.userosscache

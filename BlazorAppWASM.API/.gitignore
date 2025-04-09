@@ -1,0 +1,58 @@
+# Visual Studio
+.vs/
+.idea/
+
+# Fichiers de build
+bin/
+obj/
+
+# Fichiers de configuration utilisateur
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Fichiers de logs
+*.log
+
+# Fichiers de débogage
+*.pdb
+*.mdb
+
+# Fichiers de publication
+publish/
+out/
+
+# Fichiers temporaires
+*.tmp
+*.temp
+*.cache
+*.csproj.user
+
+# Fichiers de dépendances
+packages/
+.nuget/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Fichiers de configuration de l'IDE
+.idea/
+*.sln.iml
+
+# Fichiers de configuration de l'éditeur
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+
+# Fichiers de configuration de l'environnement
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Fichiers de configuration spécifiques
+appsettings.json 

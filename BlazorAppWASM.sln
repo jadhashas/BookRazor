@@ -5,6 +5,12 @@ VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorAppWASM", "BlazorAppWASM\BlazorAppWASM.csproj", "{6C52F7E8-4D6C-4977-A1AF-09E5BACB30CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorAppWASM.API", "BlazorAppWASM.API\BlazorAppWASM.API.csproj", "{A088B99B-FD29-4D3F-B749-9C12701E6A40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorAppWASM.DAL", "BlazorAppWASM.DAL\BlazorAppWASM.DAL.csproj", "{F6F0E636-B86D-472D-9FCC-2527D44E77EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorAppWASM.Services", "BlazorAppWASM.Services\BlazorAppWASM.Services.csproj", "{F9FA9D07-2119-45EC-9BAC-253017CACCAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{6C52F7E8-4D6C-4977-A1AF-09E5BACB30CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C52F7E8-4D6C-4977-A1AF-09E5BACB30CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C52F7E8-4D6C-4977-A1AF-09E5BACB30CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A088B99B-FD29-4D3F-B749-9C12701E6A40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A088B99B-FD29-4D3F-B749-9C12701E6A40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A088B99B-FD29-4D3F-B749-9C12701E6A40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A088B99B-FD29-4D3F-B749-9C12701E6A40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6F0E636-B86D-472D-9FCC-2527D44E77EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6F0E636-B86D-472D-9FCC-2527D44E77EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6F0E636-B86D-472D-9FCC-2527D44E77EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6F0E636-B86D-472D-9FCC-2527D44E77EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9FA9D07-2119-45EC-9BAC-253017CACCAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9FA9D07-2119-45EC-9BAC-253017CACCAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9FA9D07-2119-45EC-9BAC-253017CACCAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9FA9D07-2119-45EC-9BAC-253017CACCAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

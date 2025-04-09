@@ -166,3 +166,4 @@ C:\Users\mberkani\Source\Repos\BookRazor\BlazorAppWASM.API\bin\Debug\net9.0\Blaz
 C:\Users\mberkani\Source\Repos\BookRazor\BlazorAppWASM.API\bin\Debug\net9.0\BlazorAppWASM.Services.dll
 C:\Users\mberkani\Source\Repos\BookRazor\BlazorAppWASM.API\bin\Debug\net9.0\BlazorAppWASM.Services.pdb
 C:\Users\mberkani\Source\Repos\BookRazor\BlazorAppWASM.API\bin\Debug\net9.0\BlazorAppWASM.DAL.pdb
+C:\Users\mberkani\Source\Repos\BookRazor\BlazorAppWASM.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

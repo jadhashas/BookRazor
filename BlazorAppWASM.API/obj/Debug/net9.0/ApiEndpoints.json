@@ -1,0 +1,160 @@
+[
+  {
+    "ContainingType": "BlazorAppWASM.API.Controllers.LivreController",
+    "Method": "GetAll",
+    "RelativePath": "api/Livre",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlazorAppWASM.API.Controllers.LivreController",
+    "Method": "Create",
+    "RelativePath": "api/Livre",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "livre",
+        "Type": "BlazorAppWASM.DAL.Entities.Livre",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlazorAppWASM.API.Controllers.LivreController",
+    "Method": "GetById",
+    "RelativePath": "api/Livre/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlazorAppWASM.API.Controllers.LivreController",
+    "Method": "Update",
+    "RelativePath": "api/Livre/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "livre",
+        "Type": "BlazorAppWASM.DAL.Entities.Livre",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlazorAppWASM.API.Controllers.LivreController",
+    "Method": "Delete",
+    "RelativePath": "api/Livre/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlazorAppWASM.API.Controllers.UtilisateurController",
+    "Method": "GetAll",
+    "RelativePath": "api/Utilisateur",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlazorAppWASM.API.Controllers.UtilisateurController",
+    "Method": "Create",
+    "RelativePath": "api/Utilisateur",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "utilisateur",
+        "Type": "BlazorAppWASM.DAL.Entities.Utilisateur",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlazorAppWASM.API.Controllers.UtilisateurController",
+    "Method": "GetById",
+    "RelativePath": "api/Utilisateur/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlazorAppWASM.API.Controllers.UtilisateurController",
+    "Method": "Update",
+    "RelativePath": "api/Utilisateur/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "utilisateur",
+        "Type": "BlazorAppWASM.DAL.Entities.Utilisateur",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlazorAppWASM.API.Controllers.UtilisateurController",
+    "Method": "Delete",
+    "RelativePath": "api/Utilisateur/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

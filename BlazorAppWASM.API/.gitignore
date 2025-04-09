@@ -54,5 +54,6 @@ artifacts/
 .env.test.local
 .env.production.local
 
-# Fichiers de configuration spécifiques
-appsettings.json 
+# Fichiers de configuration sensibles
+appsettings.json
+appsettings.Development.json 

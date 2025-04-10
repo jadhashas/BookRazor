@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Bibliothèque</title>
+    <base href="/" />
+    <!-- Styles Bootstrap -->
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <!-- Styles de base -->
+    <link href="css/app.css" rel="stylesheet" />
+    <!-- Styles du thème -->
+    <link href="css/theme.css" rel="stylesheet" />
+    <!-- Styles de la navbar -->
+    <link href="css/navbar.css" rel="stylesheet" />
+    <!-- Styles de la page d'accueil -->
+    <link href="css/home.css" rel="stylesheet" />
+    <!-- Styles des livres -->
+    <link href="css/livres.css" rel="stylesheet" />
+    <!-- Styles Blazor -->
+    <link href="BlazorAppWASM.styles.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- AOS Animation -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- Manifest -->
+    <link href="manifest.json" rel="manifest" />
+    <!-- Icônes -->
+    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
+</head>
+
+<body>
+    <div id="app">
+        <Routes />
+    </div>
+
+    <div id="blazor-error-ui">
+        Une erreur est survenue. Cette application ne répondra plus tant que vous ne l'aurez pas rechargée.
+        <a href="" class="reload">Recharger</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        window.initAOS = () => {
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100
+            });
+        };
+
+        // Script pour le stockage local
+        window.localStorageInterop = {
+            getItem: function (key) {
+                return localStorage.getItem(key);
+            },
+            setItem: function (key, value) {
+                localStorage.setItem(key, value);
+            },
+            removeItem: function (key) {
+                localStorage.removeItem(key);
+            }
+        };
+    </script>
+</body>
+
+</html>

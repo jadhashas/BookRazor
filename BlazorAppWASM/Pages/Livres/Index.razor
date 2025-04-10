@@ -180,6 +180,12 @@
 }
 else
 {
+    @if (!string.IsNullOrEmpty(_errorMessage))
+    {
+        <div class="alert alert-danger mt-3" role="alert">
+            @_errorMessage
+        </div>
+    }
     <div class="page-header">
         <h1>Votre Collection</h1>
         <button class="btn btn-primary" @onclick="NavigateToAdd">
@@ -239,13 +245,6 @@ else
                     </div>
                 </div>
             }
-        </div>
-    }
-
-    @if (!string.IsNullOrEmpty(_errorMessage))
-    {
-        <div class="alert alert-danger mt-3" role="alert">
-            @_errorMessage
         </div>
     }
 }

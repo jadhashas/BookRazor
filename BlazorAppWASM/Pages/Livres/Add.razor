@@ -10,6 +10,12 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
+                    @if (!string.IsNullOrEmpty(_errorMessage))
+                    {
+                        <div class="alert alert-danger mt-3" role="alert">
+                            @_errorMessage
+                        </div>
+                    }
                     @if (_isLoading)
                     {
                         <div class="text-center">
@@ -21,12 +27,6 @@
                     else
                     {
                         <LivreForm OnLivreSave="SaveLivreAsync" OnLivreCancel="CancelAdd" />
-                    }
-                    @if (!string.IsNullOrEmpty(_errorMessage))
-                    {
-                        <div class="alert alert-danger mt-3" role="alert">
-                            @_errorMessage
-                        </div>
                     }
                 </div>
             </div>

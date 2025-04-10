@@ -3,6 +3,9 @@ using System.IO;
 using BlazorAppWASM.Models;
 using BlazorAppWASM.Services.Interfaces;
 using BlazorAppWASM.Config;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace BlazorAppWASM.Services.Implementations
 {
@@ -46,16 +49,29 @@ namespace BlazorAppWASM.Services.Implementations
         {
             try
             {
-                var response = await _httpClient.PostAsJsonAsync("api/livre", livre);
+                var jsonContent = JsonSerializer.Serialize(livre, new JsonSerializerOptions 
+                { 
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    WriteIndented = true
+                });
+                
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync("api/Livre", content);
+
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<Livre>();
+                    var result = await response.Content.ReadFromJsonAsync<Livre>();
+                    return result;
                 }
+
+                var errorContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Erreur API: {response.StatusCode} - {errorContent}");
                 return null;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return null;
+                Console.WriteLine($"Exception dans AddAsync: {ex.Message}");
+                throw;
             }
         }
 

@@ -25,6 +25,17 @@ public partial class AddBase : ComponentBase
             _isLoading = true;
             _errorMessage = null;
 
+            // Ne pas envoyer l'URL en base64 à l'API
+            if (args.ImageUrl?.StartsWith("data:") == true)
+            {
+                args.Livre.ImageUrl = null; // On laisse l'API générer l'URL après l'upload
+            }
+            else if (string.IsNullOrEmpty(args.Livre.ImageUrl))
+            {
+                // Si aucune image n'est fournie, utiliser une image par défaut
+                args.Livre.ImageUrl = $"https://picsum.photos/200/300?random={Random.Shared.Next(1, 1000)}";
+            }
+
             // Sauvegarder le livre
             var livre = await LivreManager.AddAsync(args.Livre);
             

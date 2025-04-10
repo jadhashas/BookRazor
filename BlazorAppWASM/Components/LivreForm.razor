@@ -261,6 +261,7 @@
     {
         public Livre Livre { get; set; } = default!;
         public IBrowserFile? Image { get; set; }
+        public string? ImageUrl { get; set; }
     }
 
     protected override void OnParametersSet()
@@ -277,9 +278,10 @@
                 Prix = ExistingLivre.Prix,
                 Description = ExistingLivre.Description,
                 Type = ExistingLivre.Type,
-                Disponible = ExistingLivre.Disponible
+                Disponible = ExistingLivre.Disponible,
+                ImageUrl = ExistingLivre.ImageUrl
             };
-            imageUrl = $"/images/books/{ExistingLivre.Id}.jpg";
+            imageUrl = ExistingLivre.ImageUrl ?? $"/images/books/{ExistingLivre.Id}.jpg";
         }
     }
 
@@ -328,7 +330,8 @@
         var args = new SaveLivreEventArgs
         {
             Livre = currentLivre,
-            Image = uploadedImage
+            Image = uploadedImage,
+            ImageUrl = imageUrl
         };
         await OnLivreSave.InvokeAsync(args);
     }

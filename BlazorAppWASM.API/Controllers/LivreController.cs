@@ -1,9 +1,11 @@
 ﻿using BlazorAppWASM.DAL.Entities;
 using BlazorAppWASM.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BlazorAppWASM.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class LivreController : ControllerBase

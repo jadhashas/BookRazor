@@ -1,7 +1,7 @@
 using BlazorAppWASM.Services.Interfaces;
 using Microsoft.JSInterop;
 
-namespace BlazorAppWASM.Services
+namespace BlazorAppWASM.Services.Implementations
 {
     public class LocalStorageService : ILocalStorageService
     {

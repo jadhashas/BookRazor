@@ -1,7 +1,8 @@
 @page "/livres"
 @using BlazorAppWASM.Models
 @using BlazorAppWASM.Services
-@inject LivreService LivreService
+@using BlazorAppWASM.Services.Interfaces
+@inject ILivreService LivreService
 @inject NavigationManager NavigationManager
 
 <style>
@@ -169,12 +170,12 @@
 
 <div class="page-header">
     <h1>Votre Collection</h1>
-    <button class="btn btn-primary" @onclick="@(() => NavigationManager.NavigateTo("/livres/add"))">
+    <button class="btn btn-primary" @onclick="NavigateToAdd">
         <i class="fas fa-plus me-2"></i> Ajouter un livre
     </button>
 </div>
 
-@if (livres == null)
+@if (_isLoading)
 {
     <div class="loading-container">
         <div class="spinner-grow text-primary" role="status">
@@ -183,13 +184,13 @@
         <p class="mt-3">Chargement de votre collection...</p>
     </div>
 }
-else if (!livres.Any())
+else if (Livres == null || !Livres.Any())
 {
     <div class="empty-state">
         <i class="fas fa-books fa-4x"></i>
         <h3>Votre bibliothèque est vide</h3>
         <p>Commencez à construire votre collection dès maintenant</p>
-        <button class="btn btn-primary" @onclick="@(() => NavigationManager.NavigateTo("/livres/add"))">
+        <button class="btn btn-primary" @onclick="NavigateToAdd">
             <i class="fas fa-plus me-2"></i> Ajouter votre premier livre
         </button>
     </div>
@@ -197,36 +198,31 @@ else if (!livres.Any())
 else
 {
     <div class="books-grid">
-        @foreach (var livre in livres)
+        @foreach (var livre in Livres)
         {
             <div class="book-card">
-                <img src="/images/book-cover-placeholder.jpg" alt="@livre.Titre" class="book-image" />
+                <img src="@livre.ImageUrl" alt="@livre.Titre" class="book-image" onerror="this.onerror=null; this.src='images/default-book.jpg';" />
                 <div class="book-status @(livre.Disponible ? "status-available" : "status-borrowed")">
                     @(livre.Disponible ? "Disponible" : "Emprunté")
                 </div>
                 <div class="book-content">
                     <div class="book-type">
-                        <i class="fas fa-book"></i>
-                        <span>@livre.Type</span>
-                        <span>•</span>
-                        <span>@livre.DatePublication.Year</span>
+                        <i class="fas fa-bookmark"></i>
+                        @livre.Type
                     </div>
                     <h3 class="book-title">@livre.Titre</h3>
                     <div class="book-author">
                         <i class="fas fa-user"></i>
-                        <span>@livre.Auteur</span>
+                        @livre.Auteur
                     </div>
                     <p class="book-description">@livre.Description</p>
                     <div class="book-actions">
-                        <a href="/livres/details/@livre.Id" class="book-link">Voir plus</a>
-                        <div>
-                            <button class="btn btn-light btn-sm" @onclick="@(() => NavigationManager.NavigateTo($"/livres/edit/{livre.Id}"))">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-danger btn-sm" @onclick="@(() => SupprimerLivre(livre.Id))">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
+                        <button class="btn btn-light" @onclick="() => NavigateToEdit(livre.Id)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger" @onclick="() => DeleteLivre(livre.Id)">
+                            <i class="fas fa-trash"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -234,31 +230,59 @@ else
     </div>
 }
 
+@if (!string.IsNullOrEmpty(_errorMessage))
+{
+    <div class="alert alert-danger mt-3" role="alert">
+        @_errorMessage
+    </div>
+}
+
 @code {
-    private List<Livre> livres;
+    private IEnumerable<Livre>? Livres;
+    private bool _isLoading = true;
+    private string? _errorMessage;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            livres = await LivreService.GetLivresAsync();
+            Livres = await LivreService.GetAllAsync();
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Erreur lors du chargement des livres : {ex.Message}");
+            _errorMessage = ex.Message;
+        }
+        finally
+        {
+            _isLoading = false;
         }
     }
 
-    private async Task SupprimerLivre(int id)
+    private void NavigateToAdd()
+    {
+        NavigationManager.NavigateTo("/livres/add");
+    }
+
+    private void NavigateToEdit(int id)
+    {
+        NavigationManager.NavigateTo($"/livres/edit/{id}");
+    }
+
+    private async Task DeleteLivre(int id)
     {
         try
         {
-            await LivreService.DeleteLivreAsync(id);
-            livres = await LivreService.GetLivresAsync();
+            var success = await LivreService.DeleteAsync(id);
+            if (success)
+            {
+                Livres = await LivreService.GetAllAsync();
+            }
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Erreur lors de la suppression du livre : {ex.Message}");
+            _errorMessage = ex.Message;
         }
     }
 } 

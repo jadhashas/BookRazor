@@ -76,5 +76,29 @@ namespace BlazorAppWASM.API.Controllers
             }
             return NoContent(); // 204 si la suppression réussit
         }
+
+        [HttpPost("{id}/image")]
+        public async Task<IActionResult> UploadImage(int id, IFormFile image)
+        {
+            if (image == null || image.Length == 0)
+            {
+                return BadRequest("Aucune image n'a été fournie.");
+            }
+
+            if (!image.ContentType.StartsWith("image/"))
+            {
+                return BadRequest("Le fichier doit être une image.");
+            }
+
+            using var stream = image.OpenReadStream();
+            var success = await _livreService.UploadImageAsync(id, stream, image.FileName);
+
+            if (!success)
+            {
+                return NotFound("Livre non trouvé ou erreur lors de l'upload.");
+            }
+
+            return NoContent();
+        }
     }
 }

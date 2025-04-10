@@ -169,6 +169,7 @@ C:\Users\mberkani\Source\Repos\BookRazor\BlazorAppWASM.API\bin\Debug\net9.0\Blaz
 C:\Users\mberkani\Source\Repos\BookRazor\BlazorAppWASM.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\bin\Debug\net9.0\appsettings.Development.json
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\bin\Debug\net9.0\appsettings.json
+C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\bin\Debug\net9.0\BlazorAppWASM.API.staticwebassets.runtime.json
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\bin\Debug\net9.0\BlazorAppWASM.API.staticwebassets.endpoints.json
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\bin\Debug\net9.0\BlazorAppWASM.API.exe
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\bin\Debug\net9.0\BlazorAppWASM.API.deps.json
@@ -178,6 +179,7 @@ C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\bin\Debu
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\bin\Debug\net9.0\Azure.Core.dll
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\bin\Debug\net9.0\Azure.Identity.dll
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\bin\Debug\net9.0\Humanizer.dll
+C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\bin\Debug\net9.0\Microsoft.Build.Locator.dll
@@ -329,11 +331,10 @@ C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\obj\Debu
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.BlazorAppWASM.API.props
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.BlazorAppWASM.API.props
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\obj\Debug\net9.0\staticwebassets.pack.json
-C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\obj\Debug\net9.0\BlazorAp.BAE08CCB.Up2Date
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\obj\Debug\net9.0\BlazorAppWASM.API.dll
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\obj\Debug\net9.0\refint\BlazorAppWASM.API.dll
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\obj\Debug\net9.0\BlazorAppWASM.API.pdb
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\obj\Debug\net9.0\BlazorAppWASM.API.genruntimeconfig.cache
 C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\obj\Debug\net9.0\ref\BlazorAppWASM.API.dll
-C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\jhashas\OneDrive - SQLI\Bureau\BlazorAppWASM\BlazorAppWASM.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

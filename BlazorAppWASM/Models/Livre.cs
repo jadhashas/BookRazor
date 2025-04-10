@@ -32,5 +32,8 @@ namespace BlazorAppWASM.Models
         public string Type { get; set; } = "Roman";
 
         public bool Disponible { get; set; } = true;
+
+        [StringLength(255)]
+        public string? ImageUrl { get; set; }
     }
 } 

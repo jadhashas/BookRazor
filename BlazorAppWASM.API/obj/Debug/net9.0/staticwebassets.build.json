@@ -1,12 +1,20 @@
 {
   "Version": 1,
-  "Hash": "iLovliYNL/eWc/k93K9pCKP0kgsngdpSjyPfec+BoGs=",
+  "Hash": "p6Qpadly2yGNWpBBltcf7DS1WA7T8GHh0ia4iPA3E70=",
   "Source": "BlazorAppWASM.API",
   "BasePath": "_content/BlazorAppWASM.API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "BlazorAppWASM.API\\wwwroot",
+      "Source": "BlazorAppWASM.API",
+      "ContentRoot": "C:\\Users\\jhashas\\OneDrive - SQLI\\Bureau\\BlazorAppWASM\\BlazorAppWASM.API\\wwwroot\\",
+      "BasePath": "_content/BlazorAppWASM.API",
+      "Pattern": "**"
+    }
+  ],
   "Assets": [],
   "Endpoints": []
 }

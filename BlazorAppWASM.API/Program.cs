@@ -6,14 +6,38 @@ using BlazorAppWASM.Services;
 using BlazorAppWASM.DAL.Data;
 using BlazorAppWASM.Services.Interfaces;
 using BlazorAppWASM.Services.Services;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.AspNetCore.Server.IISIntegration;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-// Configuration du DbContext
+
+// Configuration pour les fichiers volumineux
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Limits.MaxRequestBodySize = null;
+    serverOptions.Limits.MinRequestBodyDataRate = null;
+    serverOptions.Limits.MinResponseDataRate = null;
+});
+
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.ValueLengthLimit = 209715200; // 200MB
+    options.MultipartBodyLengthLimit = 209715200; // 200MB
+    options.MultipartHeadersLengthLimit = 209715200; // 200MB
+    options.BufferBody = true;
+});
+
+builder.Services.Configure<IISServerOptions>(options =>
+{
+    options.MaxRequestBodySize = int.MaxValue;
+});
+
+// Configuration de la base de données
 builder.Services.AddDbContext<DbContexte>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -41,7 +65,8 @@ builder.Services.AddCors(options =>
         {
             builder.AllowAnyOrigin()
                    .AllowAnyMethod()
-                   .AllowAnyHeader();
+                   .AllowAnyHeader()
+                   .WithExposedHeaders("Content-Disposition");
         });
 });
 
@@ -52,14 +77,27 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Middleware pour désactiver la limite de taille des requêtes
+app.Use(async (context, next) =>
 {
-    app.MapOpenApi();
-}
+    context.Features.Get<IHttpMaxRequestBodySizeFeature>().MaxRequestBodySize = null;
+    await next.Invoke();
+});
 
 app.UseHttpsRedirection();
+
+// Activation des fichiers statiques avec configuration
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=600");
+    }
+});
+
+// Activation CORS
 app.UseCors("AllowAll");
+
 app.UseAuthentication();
 app.UseAuthorization();
 

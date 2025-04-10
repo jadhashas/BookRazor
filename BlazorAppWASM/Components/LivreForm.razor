@@ -97,13 +97,6 @@
 </div>
 
 @code {
-    private Livre currentLivre = new();
-    private string? imageUrl;
-    private IBrowserFile? uploadedImage;
-    private string? errorMessage;
-    private const int MaxFileSize = 5 * 1024 * 1024; // 5MB
-    private readonly string[] AllowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
-
     [Parameter]
     public Livre? ExistingLivre { get; set; }
 
@@ -112,6 +105,13 @@
 
     [Parameter]
     public EventCallback OnLivreCancel { get; set; }
+
+    private Livre currentLivre = new();
+    private string? imageUrl;
+    private IBrowserFile? uploadedImage;
+    private string? errorMessage;
+    private const int MaxFileSize = 5 * 1024 * 1024; // 5MB
+    private readonly string[] AllowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
 
     public class SaveLivreEventArgs
     {
@@ -193,4 +193,5 @@
     {
         await OnLivreCancel.InvokeAsync();
     }
+} 
 } 

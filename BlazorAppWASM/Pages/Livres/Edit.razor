@@ -1,7 +1,5 @@
 @page "/livres/edit/{LivreId:int}"
-@using Microsoft.AspNetCore.Components.Forms
-@using BlazorAppWASM.Components
-@using BlazorAppWASM.Models
+@inherits EditBase
 
 <div class="page-header">
     <h1>Modifier le livre</h1>
@@ -12,7 +10,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    @if (currentLivre == null)
+                    @if (_isLoading)
                     {
                         <div class="loading-container">
                             <div class="spinner-grow text-primary" role="status">
@@ -21,9 +19,21 @@
                             <p class="mt-3">Chargement du livre...</p>
                         </div>
                     }
+                    else if (CurrentLivre == null)
+                    {
+                        <div class="alert alert-warning" role="alert">
+                            Livre non trouvé
+                        </div>
+                    }
                     else
                     {
-                        <LivreForm ExistingLivre="currentLivre" OnLivreSave="SaveLivreAsync" OnLivreCancel="CancelEdit" />
+                        <LivreForm ExistingLivre="CurrentLivre" OnLivreSave="SaveLivreAsync" OnLivreCancel="CancelEdit" />
+                    }
+                    @if (!string.IsNullOrEmpty(_errorMessage))
+                    {
+                        <div class="alert alert-danger mt-3" role="alert">
+                            @_errorMessage
+                        </div>
                     }
                 </div>
             </div>
@@ -31,66 +41,57 @@
     </div>
 </div>
 
-@code {
-    [Parameter]
-    public int LivreId { get; set; }
+@* @code { *@
+@*     [Parameter] *@
+@*     public int LivreId { get; set; } *@
 
-    [Inject]
-    public NavigationManager Navigation { get; set; } = default!;
+@*     private Livre? CurrentLivre; *@
+@*     private bool _isLoading = true; *@
+@*     private string? _errorMessage; *@
 
-    [Inject]
-    public BlazorAppWASM.Services.LivreService LivreManager { get; set; } = default!;
+@*     [Inject] *@
+@*     public ILivreService LivreService { get; set; } *@
 
-    private BlazorAppWASM.Models.Livre? currentLivre;
+@*     [Inject] *@
+@*     public NavigationManager NavigationManager { get; set; } *@
 
-    protected override async Task OnInitializedAsync()
-    {
-        try
-        {
-            currentLivre = await LivreManager.GetLivreByIdAsync(LivreId);
-            if (currentLivre == null)
-            {
-                Navigation.NavigateTo("/livres");
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Erreur lors du chargement du livre : {ex.Message}");
-            Navigation.NavigateTo("/livres");
-        }
-    }
+@*     protected override async Task OnInitializedAsync() *@
+@*     { *@
+@*         try *@
+@*         { *@
+@*             CurrentLivre = await LivreService.GetByIdAsync(LivreId); *@
+@*         } *@
+@*         catch (Exception ex) *@
+@*         { *@
+@*             _errorMessage = $"Erreur lors du chargement du livre : {ex.Message}"; *@
+@*         } *@
+@*         finally *@
+@*         { *@
+@*             _isLoading = false; *@
+@*         } *@
+@*     } *@
 
-    private async Task SaveLivreAsync(LivreForm.SaveLivreEventArgs args)
-    {
-        try
-        {
-            // S'assurer que l'ID est correctement défini
-            args.Livre.Id = LivreId;
+@*     private async Task SaveLivreAsync(Livre livreModifie) *@
+@*     { *@
+@*         try *@
+@*         { *@
+@*             // Générer une nouvelle URL d'image aléatoire si demandé *@
+@*             if (livreModifie.ImageUrl == null) *@
+@*             { *@
+@*                 livreModifie.ImageUrl = $"https://picsum.photos/200/300?random={Random.Shared.Next(1, 1000)}"; *@
+@*             } *@
             
-            // Mettre à jour le livre
-            await LivreManager.UpdateLivreAsync(args.Livre);
+@*             await LivreService.UpdateAsync(livreModifie); *@
+@*             NavigationManager.NavigateTo("/livres"); *@
+@*         } *@
+@*         catch (Exception ex) *@
+@*         { *@
+@*             _errorMessage = $"Erreur lors de la modification du livre : {ex.Message}"; *@
+@*         } *@
+@*     } *@
 
-            // Si une nouvelle image a été uploadée, la sauvegarder
-            if (args.Image != null)
-            {
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "books", $"{LivreId}.jpg");
-                Directory.CreateDirectory(Path.GetDirectoryName(path)!);
-
-                await using var stream = args.Image.OpenReadStream();
-                await using var fileStream = File.Create(path);
-                await stream.CopyToAsync(fileStream);
-            }
-
-            Navigation.NavigateTo("/livres");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Erreur lors de la mise à jour du livre : {ex.Message}");
-        }
-    }
-
-    private void CancelEdit()
-    {
-        Navigation.NavigateTo("/livres");
-    }
-} 
+@*     private void CancelEdit() *@
+@*     { *@
+@*         NavigationManager.NavigateTo("/livres"); *@
+@*     } *@
+@* } *@

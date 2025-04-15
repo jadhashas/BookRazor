@@ -55,24 +55,6 @@ dotnet run --project BlazorAppWASM.API
 dotnet run --project BlazorAppWASM
 ```
 
-## 🏗️ Structure du projet
-
-```
-BlazorAppWASM/
-├── BlazorAppWASM/           # Application Blazor WASM
-│   ├── Components/          # Composants réutilisables
-│   ├── Pages/              # Pages de l'application
-│   ├── Services/           # Services et interfaces
-│   └── Shared/            # Composants partagés
-│
-├── BlazorAppWASM.API/      # API Backend
-│   ├── Controllers/        # Contrôleurs API
-│   ├── Data/              # Contexte et migrations EF
-│   └── Models/            # Modèles de données
-│
-└── BlazorAppWASM.Models/   # Modèles partagés
-```
-
 ## 📚 Gestion des livres
 
 L'application permet de :
